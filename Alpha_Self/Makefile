@@ -1,0 +1,37 @@
+TARGET = Alpha_SelfDST
+CC = g++
+SRCS = Alpha_SelfDST.C
+DICTNAME = Alpha_SelfDST_dict
+#SRCS = $(addsuffix .C, $(TARGET))
+DIR = .
+#SOURCES = $(DIR)/reconSelector.C
+#HEADERS = $(DIR)/reconSelector.h
+#DEPS = $(DIR)/G4DSdata.hh
+OBJS = $(addsuffix .o, $(notdir $(basename $(SRCS))))
+#SOBJS = $(addsuffix .o, $(notdir $(basename $(SOURCES))))
+ROOTCFLAGS = $(shell $(ROOTSYS)/bin/root-config --cflags) #-Wall -fPIC -g 
+ROOTLIBS   = $(shell $(ROOTSYS)/bin/root-config --libs) -lProof -lProofPlayer
+ROOTLDFLAGS = $(shell $(ROOTSYS)/bin/root-config --ldflags)
+ROOTCINT = $(ROOTSYS)/bin/rootcint
+CXXFLAGS   = $(ROOTCFLAGS) -Wall -fPIC -fpermissive  -g #-pthread                      
+CXXLIBS    = $(ROOTLIBS)
+
+all: $(DICTNAME).so $(TARGET) 
+
+%: %.o
+	$(CC) $(CXXFLAGS) $(CXXLIBS) $(DICTNAME).so $< -o $@
+
+$(OBJS): $(SRCS)
+	$(CC) $(CXXFLAGS) -c $^
+
+
+$(DICTNAME).cxx:
+	$(ROOTCINT) -f $@ -c -p $(SRCS) VetoEvent.h LinkDef.h
+
+$(DICTNAME).so: $(DICTNAME).cxx
+	$(CC) -shared -o $@ $(ROOTLDFLAGS) $(CXXFLAGS) $(CXXLIBS) -I$(ROOTSYS)/include $^
+
+#.PHONY: clean
+
+clean:
+	rm -rf $(DIR)/*_dict.h $(DIR)/*_dict.C

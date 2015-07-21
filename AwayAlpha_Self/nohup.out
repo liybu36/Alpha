@@ -1,0 +1,25 @@
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   5.34/21  9 September 2014   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+ROOT 5.34/21 (v5-34-21@v5-34-21, Sep 09 2014, 15:29:00 on linuxx8664gcc)
+
+CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+Processing Data file: /darkside/data/DST/DST_Run011046.root
+startfile 11046	 endfile 11046  series 11046
+Warning in <TFile::Init>: file /darkside/data/DST/DST_Run011046.root probably not closed, trying to recover
+Info in <TFile::Recover>: /darkside/data/DST/DST_Run011046.root, recovered key TTree:DSTtree at address 15833198489
+Warning in <TFile::Init>: successfully recovered 1 keys
+Entries= 9637
+after 0.173162
+first 0.173162
+===>> Application Finished
